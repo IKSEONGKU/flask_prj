@@ -8,7 +8,7 @@ app = Flask(__name__)
 # 파일 업로드를 위한 HTML 템플릿
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index1.html')
 
 # 이미지를 업로드하고 저장하는 엔드포인트
 @app.route('/upload', methods=['POST'])
@@ -18,15 +18,18 @@ def upload():
     # 임의의 파일 이름 생성
     filename = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8)) + '.jpg'
 
-    # 이미지를 서버 내 디렉토리에 저장
-    file.save(os.path.join('uploads', filename))
+    # Flask 는 static 안에 파일만 인식 가능
+    file.save(os.path.join('static/img', filename))
+#   file.save(os.path.join('uploads', filename))
 
     return redirect(url_for('show_image', filename=filename))
 
 # 저장된 이미지를 보여주는 엔드포인트
 @app.route('/image/<filename>')
 def show_image(filename):
+    filename = 'img/'+filename
     return render_template('image.html', filename=filename)
+
 
 if __name__ == '__main__':
     # uploads 디렉토리 생성
