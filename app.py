@@ -8,7 +8,7 @@ app = Flask(__name__)
 # 파일 업로드를 위한 HTML 템플릿
 @app.route('/')
 def index():
-    return render_template('index1.html')
+    return render_template('index.html')
 
 # 이미지를 업로드하고 저장하는 엔드포인트
 @app.route('/upload', methods=['POST'])
